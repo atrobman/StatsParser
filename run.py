@@ -85,23 +85,27 @@ fig, ax = plt.subplots(2)
 
 #total upgrade cost: 1870
 users_score = sorted(users, key=lambda u: u.score, reverse=True)
-for user in users_score[:10]:
-    print(f"{user.name} has total score {user.score}")
-    print(f"     spent {user.spent_on_upgrades} on upgrades")
-    print(f"     won: {user.gambling_won}      lost: {user.gambling_lost}\n")
+# for user in users_score[:10]:
+#     print(f"{user.name} has total score {user.score}")
+#     print(f"     spent {user.spent_on_upgrades} on upgrades")
+#     print(f"     won: {user.gambling_won}      lost: {user.gambling_lost}\n")
 
 ax[0].plot( [user.score for user in users_score] )
 ax[0].set(xlabel="Rank", ylabel="Score")
+ax[0].set_title("User Score by Rank")
 
 users_gambling_total = sorted(users, key=lambda u: u.gambling_won + u.gambling_lost, reverse=True)
-for user in users_gambling_total[:10]:
-    print(user.name)
-    print(f"    won: {user.gambling_won}      lost: {user.gambling_lost}\n")
+# for user in users_gambling_total[:10]:
+#     print(user.name)
+#     print(f"    won: {user.gambling_won}      lost: {user.gambling_lost}\n")
 
 x_data = [user.gambling_won for user in users_gambling_total[9:]]
 y_data = [user.gambling_lost for user in users_gambling_total[9:]]
 
 ax[1].scatter(x_data, y_data)
 ax[1].set(xlabel="Won", ylabel="Lost")
-plt.subplots_adjust(hspace=0.8)   
+ax[1].set_title("User Gambling Winnings vs Gambling Losses")
+ax[1].grid()
+
+plt.subplots_adjust(hspace=0.8)  
 plt.show()
